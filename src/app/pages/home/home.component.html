@@ -1,1 +1,36 @@
-<p>home works!</p>
+<app-header></app-header>
+<div class="container mt-4">
+  <div class="bg-success text-white text-center py-2 mb-4 rounded">
+    <h4>Tarefas - {{ currentDate | date: 'dd MMMM yyyy' }}</h4>
+  </div>
+
+  <div class="d-flex justify-content-end mb-4">
+    <button class="btn btn-primary" routerLink="/new">
+      Adicionar <i class="bi bi-plus-circle-fill"></i>
+    </button>
+  </div>
+
+  <div *ngIf="tasks.length > 0; else noTasksMessage">
+    <div class="row">
+      </div>
+  </div>
+</div>
+<div class="card mb-3" *ngFor="let task of tasks">
+  <div class="card-body">
+    <span class="badge" [ngClass]="{
+      'bg-success': task.priority === 'Baixo',
+      'bg-warning': task.priority === 'Medio',
+      'bg-danger': task.priority === 'Alto'}">
+      {{ task.priority | uppercase }}
+    </span>
+    <p class="card-title h5 mt-2">{{ task.name }}</p>
+    <p class="card-text text-muted">Vencimento {{ task.date | date: 'fullDate' }}</p>
+
+    <button class="btn btn-warning me-2" [routerLink]="['/update', task.id]">
+      Editar <i class="bi bi-pencil-square"></i>
+    </button>
+    <button class="btn btn-danger" (click)="deleteTask(task.id)">
+      Deletar <i class="bi bi-trash"></i>
+    </button>
+  </div>
+</div>
