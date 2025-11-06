@@ -4,7 +4,8 @@ import { TaskService } from '../app/services/task.service'
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TaskService],
+  imports: [RouterOutlet],
+  providers: [TaskService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

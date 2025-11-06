@@ -1,11 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
+import { HeaderComponent } from '../../components/header/header.component';
+import { TaskService } from '../../services/task.service';
+import { ITask } from '../../models/task.model';
 
 @Component({
   selector: 'app-update-task',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterLink, HeaderComponent],
   templateUrl: './update-task.component.html',
-  styleUrl: './update-task.component.scss'
+  styleUrls: ['./update-task.component.scss']
 })
-export class UpdateTaskComponent {
+export class UpdateTaskComponent implements OnInit {
+  task!: ITask;
 
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private taskService: TaskService
+  ) {}
+
+  ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    const found = this.taskService.getTaskById(id!);
+    if (found) this.task = { ...found };
+  }
+
+  setCategory(category: string) {
+    this.task.category = category;
+  }
+
+  updateTask() {
+    this.taskService.updateTask(this.task);
+    this.router.navigate(['/']);
+  }
 }

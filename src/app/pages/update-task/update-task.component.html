@@ -1,1 +1,49 @@
-<p>update-task works!</p>
+<app-header></app-header>
+
+<div class="container mt-4">
+  <div class="bg-warning text-white text-center py-2 mb-4 rounded">
+    <h4>Editar Tarefa</h4>
+  </div>
+
+  <button class="btn btn-secondary mb-3" routerLink="/">
+    <i class="bi bi-arrow-left"></i> Voltar
+  </button>
+
+  <form (ngSubmit)="updateTask()" #taskForm="ngForm" class="bg-light p-4 rounded shadow-sm">
+    <div class="mb-3">
+      <label for="name" class="form-label">Nome</label>
+      <input type="text" id="name" class="form-control" required [(ngModel)]="task.name" name="name" />
+    </div>
+
+    <div class="mb-3">
+      <label for="priority" class="form-label">Prioridade</label>
+      <select id="priority" class="form-select" required [(ngModel)]="task.priority" name="priority">
+        <option value="Baixo">Baixo</option>
+        <option value="Medio">Médio</option>
+        <option value="Alto">Alto</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="date" class="form-label">Data limite</label>
+      <input type="date" id="date" class="form-control" required [(ngModel)]="task.date" name="date" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Categoria</label><br />
+      <div class="btn-group">
+        <button type="button" class="btn btn-outline-primary" [class.active]="task.category === 'Doméstico'" (click)="setCategory('Doméstico')">
+          Doméstico
+        </button>
+        <button type="button" class="btn btn-outline-primary" [class.active]="task.category === 'Pessoal'" (click)="setCategory('Pessoal')">
+          Pessoal
+        </button>
+        <button type="button" class="btn btn-outline-primary" [class.active]="task.category === 'Trabalho'" (click)="setCategory('Trabalho')">
+          Trabalho
+        </button>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-warning w-100 mt-3">Atualizar</button>
+  </form>
+</div>

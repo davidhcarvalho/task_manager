@@ -5,6 +5,6 @@ import { UpdateTaskComponent } from './pages/update-task/update-task.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'new-task', component: NewTaskComponent },
-  { path: 'update-task', component: UpdateTaskComponent }
+  { path: 'new', component: NewTaskComponent },
+  { path: 'update/:id', component: UpdateTaskComponent }
 ];

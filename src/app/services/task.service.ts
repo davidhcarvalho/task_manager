@@ -8,7 +8,7 @@ export class TaskService {
   private tasks: ITask[] = [];
   private storageKey = 'angularTasks';
 
-  constructor() { 
+  constructor() {
     this.loadTasks();
   }
 
@@ -27,7 +27,7 @@ export class TaskService {
     localStorage.setItem(this.storageKey, JSON.stringify(this.tasks));
   }
 
-  public getTask(): ITask[] {
+  public getTasks(): ITask[] {
     return this.tasks;
   }
 
